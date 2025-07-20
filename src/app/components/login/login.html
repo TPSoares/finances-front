@@ -1,0 +1,87 @@
+<div class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
+    <div class="flex flex-col items-center justify-center">
+        <div
+            style="
+                border-radius: 56px;
+                padding: 0.3rem;
+                background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);
+            "
+        >
+            <div class="w-full bg-surface-0 dark:bg-surface-900 py-20 px-8 sm:px-20" style="border-radius: 53px">
+                <div class="text-center mb-8">
+                    <svg viewBox="0 0 54 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8 w-16 shrink-0 mx-auto">
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M17.1637 19.2467C17.1566 19.4033 17.1529 19.561 17.1529 19.7194C17.1529 25.3503 21.7203 29.915 27.3546 29.915C32.9887 29.915 37.5561 25.3503 37.5561 19.7194C37.5561 19.5572 37.5524 19.3959 37.5449 19.2355C38.5617 19.0801 39.5759 18.9013 40.5867 18.6994L40.6926 18.6782C40.7191 19.0218 40.7326 19.369 40.7326 19.7194C40.7326 27.1036 34.743 33.0896 27.3546 33.0896C19.966 33.0896 13.9765 27.1036 13.9765 19.7194C13.9765 19.374 13.9896 19.0316 14.0154 18.6927L14.0486 18.6994C15.0837 18.9062 16.1223 19.0886 17.1637 19.2467Z"
+                            fill="var(--primary-color)"
+                        />
+                    </svg>
+                    <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">Bem-vindo!</div>
+                    <span class="text-muted-color font-medium">Digite suas credenciais</span>
+                </div>
+
+                <!-- FORM FUNCIONAL -->
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+                    <!-- EMAIL -->
+                    <div class="mb-8">
+                        <label for="login" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Email</label>
+                        <div class="p-input-icon-left w-full">
+                            <input
+                                pInputText
+                                id="login"
+                                type="email"
+                                formControlName="login"
+                                placeholder="Digite seu email"
+                                class="w-full md:w-[30rem]"
+                            />
+                        </div>
+                        @if (loginForm.get('login')?.invalid && loginForm.get('login')?.touched) {
+                            @if (loginForm.get('login')?.hasError('required')) {
+                                <small class="block text-red-500 mt-1">Email é obrigatório</small>
+                            }
+                            @if (loginForm.get('login')?.hasError('email')) {
+                                <small class="block text-red-500 mt-1">Formato de email inválido</small>
+                            }
+                        }
+                    </div>
+
+                    <!-- SENHA -->
+                    <div class="mb-8">
+                        <label for="password" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">Senha</label>
+                        <p-password
+                            id="password"
+                            formControlName="password"
+                            placeholder="Digite sua senha"
+                            [feedback]="false"
+                            [toggleMask]="true"
+                            [fluid]="true"
+                        ></p-password>
+                        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                            @if (loginForm.get('password')?.hasError('required')) {
+                                <small class="block text-red-500 mt-1">Senha é obrigatória</small>
+                            }
+                        }
+                    </div>
+
+                    <!-- BOTÃO -->
+                    <button
+                        pButton
+                        type="submit"
+                        label="Entrar"
+                        class="w-full"
+                        [disabled]="!loginForm.valid || loading"
+                    >
+                        <!-- @if (loading) {
+                            <p-progressSpinner
+                                strokeWidth="3"
+                                animationDuration=".5s"
+                                style="width: 1rem; height: 1rem; margin-right: 0.5rem;"
+                            ></p-progressSpinner>
+                        } -->
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
