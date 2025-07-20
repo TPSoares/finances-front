@@ -1,10 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account-service';
 import { AccountResponse } from '../../models/account-response';
+import { CardModule } from 'primeng/card';
+import { CurrencyPipe, DatePipe, DecimalPipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [CardModule, TitleCasePipe, CurrencyPipe, DatePipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
