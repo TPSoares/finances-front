@@ -12,12 +12,12 @@ import { TransactionTypePipe } from '../../../pipes/TransactionTypePipe';
   styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent implements OnInit {
-    private accountService = inject(TransactionsService)
+    private transactionService = inject(TransactionsService)
 
     transactions: TransactionResponse[] = [];
 
     ngOnInit() {
-        this.accountService.getAllTransactionsFromUser().subscribe({
+        this.transactionService.getAllTransactionsFromUser().subscribe({
             next: (data) => {
             this.transactions = data;
             console.log(this.transactions);
